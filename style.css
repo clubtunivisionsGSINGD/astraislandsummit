@@ -26,6 +26,36 @@ body{
 
 @media (max-width: 768px){
 
+    /* Hide desktop logo on mobile */
+.logo-desktop{
+    display:none;
+}
+
+/* Show vertical mobile logo */
+.logo-mobile{
+    display:block;
+
+    width:75vw;
+    max-width:320px;
+
+    height:auto;
+}
+
+    .logo-mobile{
+    animation:logoFade 1.2s ease forwards;
+}
+
+@keyframes logoFade{
+    from{
+        opacity:0;
+        transform:translateY(10px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
 /* ============================= */
 /* GLOBAL CENTERING FIX          */
 /* ============================= */
@@ -338,6 +368,10 @@ body{
     font-size:clamp(1rem,3vw,1.4rem);
     opacity:0;
     animation: fadeUp 1.5s ease 1.8s forwards;
+}
+
+.logo-mobile{
+    display:none;
 }
 
 .btn{
