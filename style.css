@@ -1,3 +1,16 @@
+*{
+    box-sizing:border-box;
+}
+
+html{
+    font-size:16px;
+}
+
+body{
+    margin:0;
+    overflow-x:hidden;
+}
+
 @keyframes fadeUp {
     from {
         opacity: 0;
@@ -9,6 +22,49 @@
         transform: translateY(0);
         filter: blur(0);
     }
+}
+
+@media (max-width:768px){
+    .cta-quote{
+    font-size:clamp(1.5rem, 5vw, 2.5rem);
+    padding:0 15px;
+}
+
+.footer{
+    padding:40px 15px;
+}
+    .nav{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    flex-wrap:wrap;
+    padding:10px 15px;
+}
+    .hero img{
+    max-width:90vw;
+    height:auto;
+}
+    .hero p{
+    font-size:clamp(1rem, 4vw, 1.6rem);
+    text-align:center;
+    padding:0 20px;
+}
+
+.hero h2{
+    font-size:clamp(1.5rem, 6vw, 3rem);
+}
+    *{
+    box-sizing:border-box;
+}
+
+html{
+    font-size:16px;
+}
+
+body{
+    margin:0;
+    overflow-x:hidden;
+}
 }
 
 @keyframes fadeIn {
