@@ -264,7 +264,7 @@ body{
 
 .logo-mobile{
     width:auto;
-    max-width:400px;
+    max-width:350px;
 
     animation:fadeUp 1.5s ease forwards;
 }
@@ -447,9 +447,11 @@ body{
 /* footer logos */
 .footer-logos{
     display:flex;
+    flex-direction:column;
     justify-content:center;
     align-items:center;
-    gap:30px;
+
+    gap:20px;
 
     margin-bottom:25px;
 }
@@ -460,6 +462,10 @@ body{
 
     opacity:0.9;
     transition:0.3s ease;
+}
+
+.footer-logos img:hover{
+    transform:scale(1.05);
 }
 
 .footer-logos img:hover{
