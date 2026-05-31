@@ -24,47 +24,124 @@ body{
     }
 }
 
-@media (max-width:768px){
-    .cta-quote{
-    font-size:clamp(1.5rem, 5vw, 2.5rem);
-    padding:0 15px;
-}
+@media (max-width: 768px){
 
-.footer{
-    padding:40px 15px;
-}
-    .nav{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    flex-wrap:wrap;
-    padding:10px 15px;
-}
-    .hero img{
-    max-width:90vw;
-    height:auto;
-}
-    .hero p{
-    font-size:clamp(1rem, 4vw, 1.6rem);
-    text-align:center;
-    padding:0 20px;
-}
-
-.hero h2{
-    font-size:clamp(1.5rem, 6vw, 3rem);
-}
-    *{
-    box-sizing:border-box;
-}
-
-html{
-    font-size:16px;
-}
-
+/* --- GLOBAL RESET --- */
 body{
     margin:0;
     overflow-x:hidden;
 }
+
+img, video{
+    max-width:100%;
+    height:auto;
+}
+
+*{
+    box-sizing:border-box;
+}
+
+/* --- HERO --- */
+.hero{
+    min-height:100vh;
+
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+
+    text-align:center;
+
+    padding:20px;
+}
+
+.hero img{
+    width:80vw;
+    max-width:320px;
+}
+
+.hero p{
+    font-size:clamp(1.1rem, 5vw, 1.6rem);
+    padding:0 10px;
+}
+
+/* --- NAV (floating chip style) --- */
+.nav{
+    position:fixed;
+    top:15px;
+    left:50%;
+    transform:translateX(-50%);
+
+    display:flex;
+    gap:12px;
+    align-items:center;
+
+    padding:10px 14px;
+
+    background:rgba(0,0,0,0.35);
+    backdrop-filter:blur(12px);
+
+    border-radius:999px;
+
+    z-index:1000;
+}
+
+.nav img{
+    width:90px;
+}
+
+/* --- BUBBLES --- */
+.info-bubbles{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:20px;
+
+    padding:40px 0;
+}
+
+.bubble{
+    width:90vw;
+    height:220px;
+
+    border-radius:20px;
+}
+
+/* --- CTA SECTION --- */
+.cta-section{
+    padding:80px 20px;
+    text-align:center;
+}
+
+.cta-quote{
+    font-size:clamp(1.4rem, 6vw, 2.2rem);
+    line-height:1.4;
+}
+
+.cta-btn{
+    padding:16px 32px;
+    font-size:1rem;
+}
+
+/* --- SOCIALS --- */
+.socials{
+    bottom:15px;
+    right:15px;
+
+    padding:10px 12px;
+    gap:10px;
+}
+
+.socials img{
+    width:24px;
+    height:24px;
+}
+
+/* --- VIDEO FIX --- */
+video{
+    object-fit:cover;
+}
+
 }
 
 @keyframes fadeIn {
