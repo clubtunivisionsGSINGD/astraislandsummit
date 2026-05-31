@@ -312,7 +312,8 @@ body{
 }
 
 .highlight{
-    text-shadow:0 0 15px #5201ff;
+    text-shadow:0 0 15px #ffca36;
+    font-size: 120%;
 }
 
 .club-glow{
