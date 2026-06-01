@@ -1,0 +1,1444 @@
+@font-face {
+    font-family: "Mont";
+    src: url("assets/fonts/mont/Mont-HeavyDEMO.otf") format("opentype");
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "Evogria";
+    src: url("assets/fonts/evogria/Evogria.otf") format("opentype");
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "Eternalo";
+    src: url("assets/fonts/eternalo/Eternalo.ttf") format("truetype");
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "Worldstar";
+    src: url("assets/fonts/worldstar/Worldstar.ttf") format("truetype");
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "Coolvetica";
+    src: url("assets/fonts/coolvetica/Coolvetica Rg Cond.otf") format("opentype");
+    font-display: swap;
+}
+
+:root {
+    --ink: #03040a;
+    --void: #090b16;
+    --space: #11162c;
+    --gold: #ffcc3f;
+    --gold-soft: rgba(255, 204, 63, 0.68);
+    --rose: #ad1b45;
+    --wine: #56001e;
+    --violet: #7441ff;
+    --cyan: #54e5ff;
+    --mint: #86ffd8;
+    --text: #fff8e7;
+    --muted: rgba(255, 248, 231, 0.72);
+    --glass: rgba(8, 10, 25, 0.54);
+    --glass-strong: rgba(8, 10, 25, 0.78);
+    --line: rgba(255, 255, 255, 0.14);
+    --max: 1160px;
+    --nav-height: 74px;
+    color-scheme: dark;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    min-height: 100vh;
+    overflow-x: hidden;
+    background:
+        radial-gradient(circle at 50% -10%, rgba(255, 204, 63, 0.16), transparent 38%),
+        linear-gradient(180deg, var(--ink), #070915 42%, #03040a);
+    color: var(--text);
+    font-family: "Evogria", "Trebuchet MS", sans-serif;
+    letter-spacing: 0;
+}
+
+body::before {
+    position: fixed;
+    inset: 0;
+    z-index: 4;
+    pointer-events: none;
+    content: "";
+    opacity: 0.13;
+    background-image:
+        linear-gradient(rgba(255, 255, 255, 0.045) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+    background-size: 46px 46px;
+    mask-image: linear-gradient(to bottom, transparent, #000 14%, #000 72%, transparent);
+}
+
+body::after {
+    position: fixed;
+    inset: 0;
+    z-index: 5;
+    pointer-events: none;
+    content: "";
+    opacity: 0.18;
+    background:
+        repeating-linear-gradient(
+            0deg,
+            rgba(255, 255, 255, 0.035) 0,
+            rgba(255, 255, 255, 0.035) 1px,
+            transparent 1px,
+            transparent 4px
+        );
+    mix-blend-mode: overlay;
+}
+
+a {
+    color: inherit;
+}
+
+img,
+video {
+    display: block;
+    max-width: 100%;
+}
+
+::selection {
+    background: var(--gold);
+    color: var(--ink);
+}
+
+.scroll-progress {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 2000;
+    width: 100%;
+    height: 3px;
+    transform: scaleX(0);
+    transform-origin: left;
+    background: linear-gradient(90deg, var(--gold), var(--rose), var(--cyan));
+    box-shadow: 0 0 18px rgba(255, 204, 63, 0.7);
+}
+
+.app {
+    position: relative;
+    min-height: 100vh;
+    overflow: hidden;
+    isolation: isolate;
+}
+
+.bg-video {
+    position: fixed;
+    inset: 0;
+    z-index: -4;
+    width: 100%;
+    height: 100vh;
+    object-fit: cover;
+    filter: saturate(1.22) contrast(1.12) brightness(0.8);
+    transform: scale(1.02);
+}
+
+.overlay {
+    position: fixed;
+    inset: 0;
+    z-index: -3;
+    background:
+        linear-gradient(180deg, rgba(3, 4, 10, 0.32), rgba(3, 4, 10, 0.82) 72%, #03040a 100%),
+        radial-gradient(ellipse at 18% 22%, rgba(173, 27, 69, 0.26), transparent 36%),
+        radial-gradient(ellipse at 82% 18%, rgba(84, 229, 255, 0.16), transparent 30%),
+        radial-gradient(ellipse at 50% 72%, rgba(255, 204, 63, 0.11), transparent 40%);
+}
+
+.starfield {
+    position: fixed;
+    inset: 0;
+    z-index: -2;
+    pointer-events: none;
+    background-image:
+        radial-gradient(circle, rgba(255, 255, 255, 0.95) 0 1px, transparent 1.8px),
+        radial-gradient(circle, rgba(255, 204, 63, 0.72) 0 1px, transparent 1.7px),
+        linear-gradient(115deg, transparent 0 48%, rgba(255, 255, 255, 0.2) 49%, transparent 53%);
+    background-position: 10% 20%, 70% 36%, 0 0;
+    background-size: 210px 210px, 330px 330px, 620px 620px;
+    opacity: 0.38;
+    animation: driftStars 28s linear infinite;
+}
+
+.nav {
+    position: fixed;
+    top: clamp(14px, 2.6vw, 28px);
+    left: 50%;
+    z-index: 1000;
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    width: min(calc(100% - 28px), var(--max));
+    min-height: var(--nav-height);
+    padding: 10px clamp(10px, 2vw, 18px);
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    border-radius: 999px;
+    background:
+        linear-gradient(135deg, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.035)),
+        var(--glass);
+    box-shadow:
+        0 22px 70px rgba(0, 0, 0, 0.32),
+        inset 0 0 0 1px rgba(255, 255, 255, 0.04);
+    backdrop-filter: blur(18px);
+    transform: translateX(-50%);
+    animation: navDrop 1s cubic-bezier(0.2, 0.8, 0.2, 1) both 0.2s;
+    transition: min-height 0.35s ease, background 0.35s ease, box-shadow 0.35s ease;
+}
+
+.nav.is-scrolled {
+    min-height: 60px;
+    background:
+        linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.025)),
+        rgba(5, 7, 18, 0.82);
+    box-shadow: 0 18px 55px rgba(0, 0, 0, 0.42);
+}
+
+.brand-link {
+    display: inline-flex;
+    align-items: center;
+    min-width: 0;
+    text-decoration: none;
+}
+
+.brand-link-tuniv {
+    justify-self: start;
+}
+
+.brand-link-astra {
+    justify-self: end;
+}
+
+.nav img {
+    width: clamp(82px, 13vw, 130px);
+    max-height: 46px;
+    object-fit: contain;
+    filter: drop-shadow(0 0 14px rgba(255, 204, 63, 0.18));
+    transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+.brand-link:hover img {
+    transform: translateY(-2px);
+    filter: drop-shadow(0 0 18px rgba(255, 204, 63, 0.35));
+}
+
+.nav-center {
+    display: flex;
+    justify-content: center;
+}
+
+.nav-btn,
+.btn,
+.cta-btn {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 46px;
+    overflow: hidden;
+    border-radius: 999px;
+    color: white;
+    text-decoration: none;
+    text-transform: uppercase;
+    isolation: isolate;
+}
+
+.nav-btn {
+    min-width: 118px;
+    padding: 0 18px;
+    font: 0.78rem/1 "Mont", "Arial Black", sans-serif;
+    background:
+        linear-gradient(135deg, rgba(255, 204, 63, 0.95), rgba(173, 27, 69, 0.92) 58%, rgba(116, 65, 255, 0.84));
+    box-shadow:
+        0 0 0 1px rgba(255, 255, 255, 0.18),
+        0 0 26px rgba(173, 27, 69, 0.38);
+}
+
+.btn,
+.cta-btn {
+    gap: 10px;
+    min-width: 210px;
+    padding: 0 28px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    font: clamp(0.78rem, 1.4vw, 0.95rem)/1 "Mont", "Arial Black", sans-serif;
+    background:
+        linear-gradient(135deg, rgba(255, 255, 255, 0.14), rgba(255, 255, 255, 0.035)),
+        linear-gradient(135deg, rgba(173, 27, 69, 0.86), rgba(116, 65, 255, 0.66));
+    box-shadow:
+        0 18px 55px rgba(173, 27, 69, 0.28),
+        inset 0 0 0 1px rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(16px);
+}
+
+.nav-btn::before,
+.btn::before,
+.cta-btn::before {
+    position: absolute;
+    inset: -140% -60%;
+    z-index: -1;
+    content: "";
+    background: linear-gradient(100deg, transparent 34%, rgba(255, 255, 255, 0.58), transparent 66%);
+    transform: translateX(-70%) rotate(10deg);
+    animation: buttonScan 4.5s ease-in-out infinite;
+}
+
+.nav-btn:hover,
+.btn:hover,
+.cta-btn:hover {
+    transform: translateY(-2px);
+    box-shadow:
+        0 22px 70px rgba(255, 204, 63, 0.2),
+        0 22px 70px rgba(173, 27, 69, 0.32),
+        inset 0 0 0 1px rgba(255, 255, 255, 0.14);
+}
+
+.socials {
+    position: fixed;
+    right: clamp(14px, 2vw, 24px);
+    bottom: clamp(14px, 2vw, 24px);
+    z-index: 999;
+    display: flex;
+    gap: 10px;
+    padding: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    border-radius: 999px;
+    background: var(--glass);
+    box-shadow: 0 18px 55px rgba(0, 0, 0, 0.32);
+    backdrop-filter: blur(16px);
+    animation: socialFade 1s ease both 1.2s;
+}
+
+.socials a {
+    display: grid;
+    width: 42px;
+    height: 42px;
+    place-items: center;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.08);
+    transition: transform 0.3s ease, background 0.3s ease;
+}
+
+.socials a:hover {
+    transform: translateY(-4px) scale(1.03);
+    background: rgba(255, 204, 63, 0.16);
+}
+
+.socials img {
+    width: 24px;
+    height: 24px;
+}
+
+.submission-frame {
+    position: absolute;
+    width: 0;
+    height: 0;
+    border: 0;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.hero {
+    position: relative;
+    display: grid;
+    min-height: 100svh;
+    place-items: center;
+    padding: calc(var(--nav-height) + 72px) clamp(18px, 5vw, 60px) 80px;
+}
+
+.hero::after {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    height: 34vh;
+    pointer-events: none;
+    content: "";
+    background: linear-gradient(180deg, transparent, rgba(3, 4, 10, 0.86) 72%, #03040a);
+}
+
+.hero-orbit {
+    position: absolute;
+    width: min(72vw, 780px);
+    aspect-ratio: 1;
+    pointer-events: none;
+    transform-style: preserve-3d;
+    animation: orbitFloat 11s ease-in-out infinite;
+}
+
+.hero-orbit span {
+    position: absolute;
+    inset: 13%;
+    border: 1px solid rgba(255, 204, 63, 0.18);
+    border-top-color: rgba(84, 229, 255, 0.62);
+    border-right-color: rgba(173, 27, 69, 0.42);
+    border-radius: 50%;
+    filter: drop-shadow(0 0 24px rgba(84, 229, 255, 0.18));
+    transform: rotateX(66deg) rotateZ(18deg);
+    animation: orbitSpin 18s linear infinite;
+}
+
+.hero-orbit span:nth-child(2) {
+    inset: 22%;
+    border-top-color: rgba(255, 204, 63, 0.74);
+    border-right-color: rgba(116, 65, 255, 0.38);
+    animation-duration: 24s;
+    animation-direction: reverse;
+}
+
+.hero-orbit span:nth-child(3) {
+    inset: 4%;
+    border-color: rgba(255, 255, 255, 0.08);
+    border-left-color: rgba(255, 204, 63, 0.22);
+    animation-duration: 32s;
+}
+
+.content {
+    position: relative;
+    z-index: 2;
+}
+
+.hero-content {
+    display: grid;
+    width: min(100%, 980px);
+    justify-items: center;
+    text-align: center;
+}
+
+.logo-mobile {
+    width: min(86vw, 620px);
+    filter:
+        drop-shadow(0 22px 28px rgba(0, 0, 0, 0.5))
+        drop-shadow(0 0 34px rgba(255, 204, 63, 0.24));
+    animation: logoArrive 1.3s cubic-bezier(0.2, 0.85, 0.2, 1) both 0.35s, logoBreathe 5.8s ease-in-out infinite 1.8s;
+}
+
+.hero p {
+    max-width: 720px;
+    margin-top: clamp(18px, 2.8vw, 34px);
+    font: clamp(1.05rem, 2.2vw, 1.55rem)/1.35 "Evogria", sans-serif;
+    color: var(--muted);
+    text-shadow: 0 2px 20px rgba(0, 0, 0, 0.72);
+}
+
+.hero .btn {
+    margin-top: clamp(26px, 4vw, 44px);
+}
+
+.section {
+    position: relative;
+    padding: clamp(78px, 11vw, 150px) clamp(18px, 5vw, 60px);
+}
+
+.section-shell {
+    width: min(100%, var(--max));
+    margin: 0 auto;
+}
+
+.about-section {
+    background:
+        linear-gradient(180deg, #03040a, rgba(7, 9, 21, 0.88) 48%, #050611),
+        radial-gradient(ellipse at 12% 32%, rgba(84, 229, 255, 0.1), transparent 36%);
+}
+
+.about-section::before,
+.cta-section::before,
+.footer::before {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: min(100% - 36px, var(--max));
+    height: 1px;
+    content: "";
+    transform: translateX(-50%);
+    background: linear-gradient(90deg, transparent, rgba(255, 204, 63, 0.52), rgba(84, 229, 255, 0.34), transparent);
+}
+
+.quote-panel {
+    position: relative;
+    display: grid;
+    min-height: clamp(150px, 20vw, 220px);
+    place-items: center;
+    padding: clamp(28px, 5vw, 58px);
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.13);
+    border-radius: 8px;
+    background:
+        linear-gradient(135deg, rgba(255, 255, 255, 0.11), rgba(255, 255, 255, 0.025)),
+        rgba(5, 7, 18, 0.62);
+    box-shadow:
+        0 35px 100px rgba(0, 0, 0, 0.35),
+        inset 0 0 36px rgba(255, 204, 63, 0.045);
+    backdrop-filter: blur(18px);
+}
+
+.quote-panel::before,
+.quote-panel::after {
+    position: absolute;
+    right: 28px;
+    left: 28px;
+    height: 1px;
+    content: "";
+    background: linear-gradient(90deg, transparent, rgba(255, 204, 63, 0.45), transparent);
+}
+
+.quote-panel::before {
+    top: 22px;
+}
+
+.quote-panel::after {
+    bottom: 22px;
+}
+
+.main-quote {
+    max-width: 880px;
+    min-height: 2.7em;
+    font: clamp(1.55rem, 4.6vw, 4.5rem)/1.08 "Eternalo", "Evogria", sans-serif;
+    text-align: center;
+    color: white;
+    text-shadow:
+        0 0 10px rgba(255, 204, 63, 0.38),
+        0 0 34px rgba(84, 229, 255, 0.12);
+}
+
+.main-quote.is-complete::after {
+    display: inline-block;
+    width: 0.12em;
+    height: 0.9em;
+    margin-left: 0.12em;
+    content: "";
+    vertical-align: -0.09em;
+    background: var(--gold);
+    box-shadow: 0 0 18px rgba(255, 204, 63, 0.75);
+    animation: caretBlink 1s step-end infinite;
+}
+
+.about-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
+    gap: clamp(18px, 3vw, 34px);
+    margin-top: clamp(34px, 6vw, 70px);
+    align-items: stretch;
+}
+
+.intro-block,
+.info-box {
+    position: relative;
+    min-height: 100%;
+    padding: clamp(24px, 4vw, 42px);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 8px;
+    background:
+        linear-gradient(145deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.02)),
+        rgba(8, 10, 25, 0.62);
+    box-shadow: 0 25px 80px rgba(0, 0, 0, 0.28);
+    backdrop-filter: blur(18px);
+}
+
+.intro-block::before,
+.info-box::before {
+    position: absolute;
+    inset: 12px;
+    pointer-events: none;
+    content: "";
+    border: 1px solid rgba(255, 204, 63, 0.08);
+    border-radius: 6px;
+}
+
+.intro-text,
+.info-text {
+    position: relative;
+    font: clamp(1.02rem, 1.9vw, 1.42rem)/1.65 "Coolvetica", "Trebuchet MS", sans-serif;
+    color: var(--muted);
+}
+
+.info-text strong {
+    color: var(--gold);
+    font-family: "Mont", "Arial Black", sans-serif;
+    text-shadow: 0 0 24px rgba(255, 204, 63, 0.38);
+}
+
+.percent-sign {
+    font-family: "Arial Black", Arial, sans-serif;
+    font-size: 0.92em;
+}
+
+.glow,
+.highlight {
+    color: var(--gold);
+    text-shadow:
+        0 0 10px rgba(255, 204, 63, 0.84),
+        0 0 30px rgba(255, 204, 63, 0.28);
+}
+
+.highlight {
+    display: inline-block;
+    transform: translateY(-0.03em);
+}
+
+.club-glow {
+    color: #ff6f95;
+    text-shadow:
+        0 0 12px rgba(173, 27, 69, 0.9),
+        0 0 26px rgba(173, 27, 69, 0.45);
+}
+
+.info-bubbles {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: clamp(18px, 3vw, 34px);
+    margin-top: clamp(36px, 6vw, 76px);
+}
+
+.bubble {
+    position: relative;
+    min-height: clamp(310px, 35vw, 480px);
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    border-radius: 8px;
+    background: var(--space);
+    box-shadow:
+        0 30px 90px rgba(0, 0, 0, 0.34),
+        0 0 34px rgba(116, 65, 255, 0.12);
+    transform-style: preserve-3d;
+    transition: transform 0.45s ease, box-shadow 0.45s ease, border-color 0.45s ease;
+}
+
+.bubble:nth-child(2) {
+    transition-delay: 0.08s;
+}
+
+.bubble::before {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    pointer-events: none;
+    content: "";
+    background:
+        linear-gradient(180deg, rgba(3, 4, 10, 0.05), rgba(3, 4, 10, 0.62)),
+        linear-gradient(120deg, rgba(255, 204, 63, 0.18), transparent 38%, rgba(84, 229, 255, 0.12));
+}
+
+.bubble::after {
+    position: absolute;
+    top: 18px;
+    right: 18px;
+    left: 18px;
+    z-index: 3;
+    height: 1px;
+    content: "";
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.64), transparent);
+    opacity: 0.65;
+}
+
+.bubble:hover {
+    border-color: rgba(255, 204, 63, 0.45);
+    box-shadow:
+        0 36px 110px rgba(0, 0, 0, 0.42),
+        0 0 54px rgba(255, 204, 63, 0.18);
+    transform: translateY(-8px);
+}
+
+.bubble-video {
+    width: 100%;
+    height: 100%;
+    min-height: inherit;
+    object-fit: cover;
+    filter: saturate(1.14) contrast(1.08);
+    transform: scale(1.04);
+    transition: transform 1s ease, filter 0.8s ease;
+}
+
+.bubble:hover .bubble-video {
+    transform: scale(1.1);
+    filter: saturate(1.28) contrast(1.12);
+}
+
+.bubble-content {
+    position: absolute;
+    inset: auto 0 0;
+    z-index: 4;
+    display: grid;
+    gap: 10px;
+    padding: clamp(26px, 4vw, 46px);
+    background: linear-gradient(180deg, transparent, rgba(3, 4, 10, 0.88));
+}
+
+.bubble-content h3 {
+    font: clamp(2rem, 4vw, 4.5rem)/0.92 "Worldstar", "Evogria", sans-serif;
+    color: var(--gold);
+    text-shadow:
+        0 0 18px rgba(255, 204, 63, 0.42),
+        5px 6px 0 rgba(86, 0, 30, 0.68);
+}
+
+.bubble-content p {
+    font: clamp(1rem, 1.8vw, 1.42rem)/1.2 "Mont", "Arial Black", sans-serif;
+    color: white;
+    text-shadow: 0 0 22px rgba(0, 0, 0, 0.7);
+}
+
+.countdown-section {
+    overflow: hidden;
+    background:
+        linear-gradient(180deg, #050611, rgba(8, 10, 25, 0.96)),
+        radial-gradient(ellipse at 16% 18%, rgba(84, 229, 255, 0.12), transparent 34%),
+        radial-gradient(ellipse at 84% 64%, rgba(255, 204, 63, 0.12), transparent 38%);
+}
+
+.countdown-section::before {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: min(100% - 36px, var(--max));
+    height: 1px;
+    content: "";
+    transform: translateX(-50%);
+    background: linear-gradient(90deg, transparent, rgba(84, 229, 255, 0.42), rgba(255, 204, 63, 0.52), transparent);
+}
+
+.countdown-shell {
+    position: relative;
+    display: grid;
+    justify-items: center;
+    gap: clamp(20px, 4vw, 42px);
+    width: min(100%, var(--max));
+    margin: 0 auto;
+    padding: clamp(28px, 5vw, 58px);
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.13);
+    border-radius: 8px;
+    background:
+        linear-gradient(135deg, rgba(255, 255, 255, 0.11), rgba(255, 255, 255, 0.025)),
+        rgba(8, 10, 25, 0.7);
+    box-shadow:
+        0 35px 100px rgba(0, 0, 0, 0.34),
+        inset 0 0 48px rgba(84, 229, 255, 0.04);
+    backdrop-filter: blur(18px);
+}
+
+.countdown-shell::before {
+    position: absolute;
+    inset: -34% auto auto -12%;
+    width: 46%;
+    aspect-ratio: 1;
+    content: "";
+    border: 1px solid rgba(84, 229, 255, 0.18);
+    border-radius: 50%;
+    box-shadow:
+        0 0 0 18px rgba(84, 229, 255, 0.025),
+        0 0 55px rgba(84, 229, 255, 0.12);
+}
+
+.countdown-shell::after {
+    position: absolute;
+    right: -14%;
+    bottom: 28%;
+    width: 46%;
+    height: 1px;
+    content: "";
+    background: linear-gradient(90deg, transparent, rgba(255, 204, 63, 0.64), rgba(84, 229, 255, 0.42), transparent);
+    transform: rotate(-14deg);
+    box-shadow: 0 0 28px rgba(255, 204, 63, 0.32);
+}
+
+.countdown-copy,
+.countdown-grid,
+.countdown-status {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+}
+
+.countdown-copy h2 {
+    color: var(--gold);
+    font: clamp(2.2rem, 5vw, 5rem)/0.92 "Worldstar", "Evogria", sans-serif;
+    text-shadow:
+        0 0 18px rgba(255, 204, 63, 0.42),
+        5px 6px 0 rgba(86, 0, 30, 0.68);
+}
+
+.countdown-copy p:not(.section-kicker) {
+    max-width: 520px;
+    margin: 18px auto 0;
+    color: var(--muted);
+    font: clamp(1rem, 1.75vw, 1.28rem)/1.55 "Coolvetica", "Trebuchet MS", sans-serif;
+}
+
+.countdown-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 12px;
+    width: min(100%, 780px);
+}
+
+.countdown-card {
+    display: grid;
+    min-height: 138px;
+    place-items: center;
+    padding: 18px 12px;
+    border: 1px solid rgba(255, 255, 255, 0.13);
+    border-radius: 8px;
+    background:
+        linear-gradient(145deg, rgba(255, 255, 255, 0.11), rgba(255, 255, 255, 0.025)),
+        rgba(255, 255, 255, 0.055);
+    box-shadow:
+        inset 0 0 0 1px rgba(255, 255, 255, 0.03),
+        0 20px 60px rgba(0, 0, 0, 0.24);
+}
+
+.countdown-card strong {
+    display: block;
+    color: white;
+    font: clamp(2rem, 4.6vw, 4.6rem)/0.9 "Mont", "Arial Black", sans-serif;
+    text-shadow:
+        0 0 12px rgba(255, 204, 63, 0.54),
+        0 0 34px rgba(84, 229, 255, 0.16);
+}
+
+.countdown-card span {
+    color: rgba(255, 248, 231, 0.68);
+    font: 0.78rem/1 "Mont", "Arial Black", sans-serif;
+    text-transform: uppercase;
+}
+
+.countdown-status {
+    color: var(--muted);
+    font: 0.98rem/1.4 "Coolvetica", "Trebuchet MS", sans-serif;
+}
+
+.countdown-status.is-live {
+    color: var(--mint);
+    text-shadow: 0 0 16px rgba(134, 255, 216, 0.24);
+}
+
+.registration-section {
+    overflow: hidden;
+    background:
+        linear-gradient(180deg, #050611, rgba(8, 10, 25, 0.96)),
+        radial-gradient(ellipse at 18% 18%, rgba(255, 204, 63, 0.12), transparent 34%),
+        radial-gradient(ellipse at 88% 60%, rgba(173, 27, 69, 0.18), transparent 36%);
+}
+
+.registration-section::before {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: min(100% - 36px, var(--max));
+    height: 1px;
+    content: "";
+    transform: translateX(-50%);
+    background: linear-gradient(90deg, transparent, rgba(255, 204, 63, 0.52), rgba(173, 27, 69, 0.42), transparent);
+}
+
+.registration-shell {
+    position: relative;
+    display: grid;
+    grid-template-columns: minmax(0, 0.82fr) minmax(340px, 1fr);
+    gap: clamp(24px, 5vw, 64px);
+    align-items: start;
+    width: min(100%, var(--max));
+    margin: 0 auto;
+    padding: clamp(28px, 5vw, 58px);
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.13);
+    border-radius: 8px;
+    background:
+        linear-gradient(135deg, rgba(255, 255, 255, 0.11), rgba(255, 255, 255, 0.025)),
+        rgba(8, 10, 25, 0.7);
+    box-shadow:
+        0 35px 100px rgba(0, 0, 0, 0.34),
+        inset 0 0 48px rgba(255, 204, 63, 0.04);
+    backdrop-filter: blur(18px);
+}
+
+.registration-shell::before {
+    position: absolute;
+    right: -11%;
+    top: -32%;
+    width: 44%;
+    aspect-ratio: 1;
+    content: "";
+    border: 1px solid rgba(255, 204, 63, 0.18);
+    border-radius: 50%;
+    box-shadow:
+        0 0 0 18px rgba(173, 27, 69, 0.025),
+        0 0 55px rgba(255, 204, 63, 0.12);
+}
+
+.registration-copy,
+.registration-form {
+    position: relative;
+    z-index: 1;
+}
+
+.registration-copy h2 {
+    color: var(--gold);
+    font: clamp(2.2rem, 5vw, 5rem)/0.92 "Worldstar", "Evogria", sans-serif;
+    text-shadow:
+        0 0 18px rgba(255, 204, 63, 0.42),
+        5px 6px 0 rgba(86, 0, 30, 0.68);
+}
+
+.registration-copy p:not(.section-kicker) {
+    max-width: 520px;
+    margin-top: 18px;
+    color: var(--muted);
+    font: clamp(1rem, 1.75vw, 1.28rem)/1.55 "Coolvetica", "Trebuchet MS", sans-serif;
+}
+
+.registration-form {
+    display: grid;
+    gap: 22px;
+}
+
+.field-group {
+    display: grid;
+    gap: 12px;
+    min-width: 0;
+    padding: 0;
+    border: 0;
+}
+
+.field-group label,
+.field-group legend {
+    color: rgba(255, 248, 231, 0.78);
+    font: 0.82rem/1 "Mont", "Arial Black", sans-serif;
+    text-transform: uppercase;
+}
+
+.age-field legend {
+    transform: translateY(-6px);
+}
+
+.field-group input[type="email"] {
+    width: 100%;
+    min-height: 56px;
+    padding: 0 18px;
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    border-radius: 999px;
+    outline: 0;
+    background: rgba(255, 255, 255, 0.075);
+    color: white;
+    font: 1rem/1.2 "Coolvetica", "Trebuchet MS", sans-serif;
+    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.035);
+    transition: border-color 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+}
+
+.field-group input[type="email"]::placeholder {
+    color: rgba(255, 248, 231, 0.42);
+}
+
+.field-group input[type="email"]:focus {
+    border-color: rgba(255, 204, 63, 0.58);
+    background: rgba(255, 255, 255, 0.105);
+    box-shadow:
+        inset 0 0 0 1px rgba(255, 255, 255, 0.06),
+        0 0 28px rgba(255, 204, 63, 0.16);
+}
+
+.field-group input[aria-invalid="true"] {
+    border-color: rgba(255, 111, 149, 0.78);
+    box-shadow: 0 0 28px rgba(173, 27, 69, 0.18);
+}
+
+.age-options {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+}
+
+.age-options label {
+    position: relative;
+    display: block;
+    cursor: pointer;
+}
+
+.age-options input {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.age-options span {
+    display: grid;
+    min-height: 54px;
+    place-items: center;
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.065);
+    color: white;
+    font: 0.92rem/1 "Mont", "Arial Black", sans-serif;
+    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.025);
+    transition: border-color 0.3s ease, background 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.age-options input:focus-visible + span {
+    outline: 2px solid rgba(255, 204, 63, 0.8);
+    outline-offset: 3px;
+}
+
+.age-options input:checked + span {
+    border-color: rgba(255, 204, 63, 0.62);
+    background:
+        linear-gradient(135deg, rgba(255, 204, 63, 0.26), rgba(173, 27, 69, 0.18)),
+        rgba(255, 255, 255, 0.08);
+    box-shadow:
+        0 0 28px rgba(255, 204, 63, 0.14),
+        inset 0 0 0 1px rgba(255, 255, 255, 0.05);
+}
+
+.age-options label:hover span {
+    transform: translateY(-2px);
+    border-color: rgba(255, 204, 63, 0.42);
+}
+
+.registration-submit {
+    min-height: 58px;
+    padding: 0 26px;
+    border: 0;
+    border-radius: 999px;
+    background:
+        linear-gradient(135deg, rgba(255, 204, 63, 0.95), rgba(173, 27, 69, 0.92) 58%, rgba(116, 65, 255, 0.84));
+    color: white;
+    cursor: pointer;
+    font: 0.86rem/1 "Mont", "Arial Black", sans-serif;
+    text-transform: uppercase;
+    box-shadow:
+        0 18px 48px rgba(173, 27, 69, 0.28),
+        0 0 0 1px rgba(255, 255, 255, 0.16);
+    transition: transform 0.3s ease, box-shadow 0.3s ease, opacity 0.3s ease;
+}
+
+.registration-submit:hover {
+    transform: translateY(-2px);
+    box-shadow:
+        0 24px 60px rgba(255, 204, 63, 0.18),
+        0 24px 60px rgba(173, 27, 69, 0.32);
+}
+
+.registration-submit:disabled {
+    cursor: default;
+    opacity: 0.65;
+    transform: none;
+}
+
+.registration-message {
+    min-height: 1.4em;
+    color: var(--muted);
+    font: 0.98rem/1.4 "Coolvetica", "Trebuchet MS", sans-serif;
+}
+
+.registration-message.is-success {
+    color: var(--mint);
+    text-shadow: 0 0 16px rgba(134, 255, 216, 0.24);
+}
+
+.registration-message.is-error {
+    color: #ff8dac;
+    text-shadow: 0 0 16px rgba(173, 27, 69, 0.24);
+}
+
+.section-kicker {
+    margin-bottom: 12px;
+    color: var(--cyan);
+    font: 0.78rem/1 "Mont", "Arial Black", sans-serif;
+    text-transform: uppercase;
+    text-shadow: 0 0 18px rgba(84, 229, 255, 0.36);
+}
+
+.cta-section {
+    overflow: hidden;
+    background:
+        linear-gradient(180deg, #050611, rgba(10, 8, 20, 0.95)),
+        radial-gradient(ellipse at 50% 50%, rgba(255, 204, 63, 0.12), transparent 46%);
+}
+
+.cta-section::after {
+    position: absolute;
+    inset: 18% -18% auto;
+    height: 1px;
+    content: "";
+    background: linear-gradient(90deg, transparent, rgba(255, 204, 63, 0.56), rgba(173, 27, 69, 0.5), transparent);
+    transform: rotate(-7deg);
+    box-shadow:
+        0 0 18px rgba(255, 204, 63, 0.34),
+        0 0 44px rgba(173, 27, 69, 0.24);
+}
+
+.cta-shell {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    justify-items: center;
+    width: min(100%, 920px);
+    margin: 0 auto;
+    text-align: center;
+}
+
+.cta-quote {
+    font: clamp(1.75rem, 5vw, 5.2rem)/1.04 "Eternalo", "Evogria", sans-serif;
+    text-shadow: 0 0 34px rgba(0, 0, 0, 0.55);
+}
+
+.cta-subtitle {
+    margin-top: 20px;
+    color: var(--muted);
+    font: clamp(1rem, 1.7vw, 1.3rem)/1.4 "Coolvetica", "Trebuchet MS", sans-serif;
+}
+
+.cta-btn {
+    margin-top: 30px;
+}
+
+.footer {
+    position: relative;
+    padding: clamp(58px, 8vw, 96px) clamp(20px, 5vw, 60px) 40px;
+    background:
+        linear-gradient(180deg, rgba(10, 8, 20, 0.96), #03040a),
+        radial-gradient(ellipse at 10% 100%, rgba(84, 229, 255, 0.1), transparent 40%);
+    text-align: center;
+}
+
+.footer-logos {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: clamp(22px, 5vw, 58px);
+    width: min(100%, var(--max));
+    margin: 0 auto clamp(24px, 4vw, 38px);
+    flex-wrap: wrap;
+}
+
+.footer-logos img {
+    width: auto;
+    max-width: min(230px, 72vw);
+    max-height: 76px;
+    object-fit: contain;
+    opacity: 0.92;
+    filter: drop-shadow(0 0 18px rgba(255, 204, 63, 0.15));
+    transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.footer-logos img:hover {
+    opacity: 1;
+    transform: translateY(-3px);
+}
+
+.footer-info {
+    display: grid;
+    gap: 16px;
+    max-width: 780px;
+    margin: 0 auto;
+    color: var(--muted);
+    font: clamp(1rem, 1.8vw, 1.34rem)/1.55 "Coolvetica", "Trebuchet MS", sans-serif;
+}
+
+.footer-links {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    margin-top: 30px;
+    flex-wrap: wrap;
+}
+
+.footer-links a {
+    min-width: 112px;
+    padding: 13px 20px;
+    border: 1px solid rgba(255, 255, 255, 0.13);
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.045);
+    color: white;
+    font: 0.9rem/1 "Mont", "Arial Black", sans-serif;
+    text-decoration: none;
+    transition: color 0.3s ease, border-color 0.3s ease, transform 0.3s ease, background 0.3s ease;
+}
+
+.footer-links a:hover {
+    border-color: rgba(255, 204, 63, 0.5);
+    background: rgba(255, 204, 63, 0.1);
+    color: var(--gold);
+    transform: translateY(-2px);
+}
+
+.footer-tagline {
+    margin-top: 30px;
+    color: rgba(255, 248, 231, 0.72);
+    font: clamp(1.15rem, 2vw, 1.55rem)/1.35 "Eternalo", "Evogria", sans-serif;
+    text-shadow: 0 0 18px rgba(255, 204, 63, 0.22);
+}
+
+.footer-bottom {
+    max-width: var(--max);
+    margin: 34px auto 0;
+    padding-top: 22px;
+    border-top: 1px solid rgba(255, 255, 255, 0.09);
+    color: rgba(255, 248, 231, 0.48);
+    font: 0.92rem/1.5 "Coolvetica", "Trebuchet MS", sans-serif;
+}
+
+.reveal {
+    opacity: 0;
+    transform: translateY(34px);
+    filter: blur(10px);
+    transition:
+        opacity 0.8s ease,
+        transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1),
+        filter 0.8s ease;
+}
+
+.reveal.in-view {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+}
+
+@keyframes navDrop {
+    from {
+        opacity: 0;
+        transform: translateX(-50%) translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0);
+    }
+}
+
+@keyframes driftStars {
+    from {
+        background-position: 10% 20%, 70% 36%, 0 0;
+    }
+    to {
+        background-position: 32% 58%, 42% 72%, 620px 620px;
+    }
+}
+
+@keyframes orbitFloat {
+    0%,
+    100% {
+        transform: translateY(0) rotate(-2deg);
+    }
+    50% {
+        transform: translateY(-18px) rotate(2deg);
+    }
+}
+
+@keyframes orbitSpin {
+    to {
+        transform: rotateX(66deg) rotateZ(378deg);
+    }
+}
+
+@keyframes logoArrive {
+    from {
+        opacity: 0;
+        transform: translateY(28px) scale(0.94);
+        filter: blur(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+        filter:
+            drop-shadow(0 22px 28px rgba(0, 0, 0, 0.5))
+            drop-shadow(0 0 34px rgba(255, 204, 63, 0.24));
+    }
+}
+
+@keyframes logoBreathe {
+    0%,
+    100% {
+        transform: translateY(0) scale(1);
+    }
+    50% {
+        transform: translateY(-8px) scale(1.015);
+    }
+}
+
+@keyframes buttonScan {
+    0%,
+    38% {
+        transform: translateX(-70%) rotate(10deg);
+    }
+    62%,
+    100% {
+        transform: translateX(70%) rotate(10deg);
+    }
+}
+
+@keyframes socialFade {
+    from {
+        opacity: 0;
+        transform: translateY(16px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes caretBlink {
+    50% {
+        opacity: 0;
+    }
+}
+
+@media (max-width: 760px) {
+    :root {
+        --nav-height: 64px;
+    }
+
+    body::before {
+        background-size: 34px 34px;
+        opacity: 0.1;
+    }
+
+    .nav {
+        width: calc(100% - 24px);
+        grid-template-columns: 1fr auto 1fr;
+        padding: 8px;
+    }
+
+    .nav img {
+        width: clamp(70px, 24vw, 94px);
+        max-height: 40px;
+    }
+
+    .nav-btn {
+        min-width: 96px;
+        min-height: 40px;
+        padding: 0 12px;
+        font-size: 0.68rem;
+    }
+
+    .hero {
+        padding-right: 18px;
+        padding-left: 18px;
+    }
+
+    .hero-orbit {
+        width: 118vw;
+        opacity: 0.78;
+    }
+
+    .logo-mobile {
+        width: min(94vw, 430px);
+    }
+
+    .about-grid,
+    .info-bubbles,
+    .countdown-shell,
+    .registration-shell {
+        grid-template-columns: 1fr;
+    }
+
+    .countdown-shell,
+    .registration-shell {
+        padding: 32px 22px;
+    }
+
+    .quote-panel {
+        padding: 34px 22px;
+    }
+
+    .main-quote {
+        min-height: 4.4em;
+    }
+
+    .bubble {
+        min-height: 300px;
+    }
+
+    .socials {
+        right: 12px;
+        bottom: 12px;
+        padding: 8px;
+    }
+
+    .socials a {
+        width: 38px;
+        height: 38px;
+    }
+}
+
+@media (max-width: 460px) {
+    .nav {
+        border-radius: 26px;
+    }
+
+    .brand-link-tuniv img {
+        width: 66px;
+    }
+
+    .brand-link-astra img {
+        width: 82px;
+    }
+
+    .nav-btn {
+        min-width: 88px;
+        font-size: 0.63rem;
+    }
+
+    .hero {
+        padding-top: 118px;
+    }
+
+    .btn,
+    .cta-btn {
+        width: min(100%, 280px);
+    }
+
+    .intro-block,
+    .info-box {
+        padding: 24px 20px;
+    }
+
+    .bubble {
+        min-height: 260px;
+    }
+
+    .countdown-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .countdown-card {
+        min-height: 118px;
+    }
+
+    .age-options {
+        grid-template-columns: 1fr;
+    }
+
+    .footer-links a {
+        width: 100%;
+        max-width: 280px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        scroll-behavior: auto !important;
+        animation-duration: 0.001ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.001ms !important;
+    }
+
+    .reveal {
+        opacity: 1;
+        transform: none;
+        filter: none;
+    }
+}

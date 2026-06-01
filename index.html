@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Astra Island Summit is a student-led astronomy and space conference in Djerba.">
+    <title>ASTRA ISLAND SUMMIT</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="scroll-progress" aria-hidden="true"></div>
+
+    <div class="app">
+        <video class="bg-video" autoplay muted loop playsinline poster="assets/img/bubble1.jpg">
+            <source src="assets/shootingstarsreal.mp4" type="video/mp4">
+        </video>
+
+        <div class="overlay" aria-hidden="true"></div>
+        <div class="starfield" aria-hidden="true"></div>
+
+        <nav class="nav" aria-label="Primary navigation">
+            <a class="brand-link brand-link-tuniv" href="#about" aria-label="TUNIVISIONS CLUB HIGH SCHOOL GSING DJERBA">
+                <img src="assets/logos/tuniv_gsing.png" alt="tunivgsing">
+            </a>
+
+            <div class="nav-center">
+                <a href="#register" class="nav-btn">Register</a>
+            </div>
+
+            <a class="brand-link brand-link-astra" href="#" aria-label="Astra Island Summit">
+                <img src="assets/logos/astra_horiz.png" alt="astralogo">
+            </a>
+        </nav>
+
+        <div class="socials" aria-label="Social links">
+            <a href="https://www.instagram.com/clubtunivisions.gsingd?igsh=MWxmNmhmbGxiaWZqZQ==" aria-label="Instagram">
+                <img src="assets/icons/instagram.svg" alt="Instagram">
+            </a>
+
+            <a href="https://www.facebook.com/share/191aktoGG1/" aria-label="Facebook">
+                <img src="assets/icons/facebook.svg" alt="Facebook">
+            </a>
+        </div>
+
+        <iframe class="submission-frame" name="googleFormsTarget" title="Registration submission target" aria-hidden="true"></iframe>
+
+        <main>
+            <section class="hero">
+                <div class="hero-orbit" aria-hidden="true">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+
+                <div class="content hero-content reveal">
+                    <img src="assets/logos/mobile.png" alt="Astra" class="logo-mobile">
+                    <p>Bringing the stars to <span class="glow">Everyone</span></p>
+                    <a href="#about" class="btn">Access Transmission</a>
+                </div>
+            </section>
+
+            <section id="about" class="section about-section">
+                <div class="section-shell">
+                    <div class="quote-panel reveal">
+                        <h2 class="main-quote" id="quote"></h2>
+                    </div>
+
+                    <div class="about-grid">
+                        <div class="intro-block reveal">
+                            <p class="intro-text">
+                                Introducing <span class="highlight">Astra Island Summit</span>, a conference about astronomy and the cosmos.
+                                Discover everything related to the universe.
+                            </p>
+                        </div>
+
+                        <div class="info-box reveal">
+                            <p class="info-text">
+                                This conference is <strong>100<span class="percent-sign">&#37;</span></strong> created, planned and organized by teenagers at <span class="club-glow">TUNIVISIONS CLUB HIGH SCHOOL GSING DJERBA</span>.
+                                Our goal is to share our passion about astronomy with the youth in Djerba and show them the wonders of our universe.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="info-bubbles">
+                        <article class="bubble bubble-date reveal">
+                            <video class="bubble-video" autoplay muted loop playsinline poster="assets/img/bubble1.jpg">
+                                <source src="assets/date.mp4" type="video/mp4">
+                            </video>
+
+                            <div class="bubble-content">
+                                <h3>Date</h3>
+                                <p>25 &amp; 26 July 2026</p>
+                            </div>
+                        </article>
+
+                        <article class="bubble bubble-location reveal">
+                            <video class="bubble-video" autoplay muted loop playsinline poster="assets/img/bubble2.jpg">
+                                <source src="assets/location.mp4" type="video/mp4">
+                            </video>
+
+                            <div class="bubble-content">
+                                <h3>Location</h3>
+                                <p>Centre Elife Djerba</p>
+                            </div>
+                        </article>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section countdown-section" aria-labelledby="countdown-title">
+                <div class="countdown-shell reveal" data-reveal-date="2026-07-01T00:00:00+01:00">
+                    <div class="countdown-copy">
+                        <p class="section-kicker">Reveal countdown</p>
+                        <h2 id="countdown-title">Countdown to the Reveal</h2>
+                        <p>
+                            The reveal begins on 1 July 2026.
+                        </p>
+                    </div>
+
+                    <div class="countdown-grid" id="revealCountdown" aria-label="Countdown to 1 July 2026">
+                        <div class="countdown-card">
+                            <strong data-countdown="days">00</strong>
+                            <span>Days</span>
+                        </div>
+
+                        <div class="countdown-card">
+                            <strong data-countdown="hours">00</strong>
+                            <span>Hours</span>
+                        </div>
+
+                        <div class="countdown-card">
+                            <strong data-countdown="minutes">00</strong>
+                            <span>Minutes</span>
+                        </div>
+
+                        <div class="countdown-card">
+                            <strong data-countdown="seconds">00</strong>
+                            <span>Seconds</span>
+                        </div>
+                    </div>
+
+                    <p class="countdown-status" id="countdownStatus" role="status" aria-live="polite">
+                        Counting down to 1 July 2026.
+                    </p>
+                </div>
+            </section>
+
+            <section id="register" class="section registration-section" aria-labelledby="registration-title">
+                <div class="registration-shell reveal">
+                    <div class="registration-copy">
+                        <p class="section-kicker">Registration channel</p>
+                        <h2 id="registration-title">Astra Island Summit: Follow the reveal</h2>
+                        <p>
+                            Please fill out this form to keep up with any updates regarding Astra Island Summit.
+                        </p>
+                    </div>
+
+                    <form class="registration-form" id="registrationForm" action="https://docs.google.com/forms/d/e/1FAIpQLScY0uMDWMHemk0IY8wijNJb_-aw0fBwyPou_8uyGywvnuPylA/formResponse" method="POST" target="googleFormsTarget">
+                        <div class="field-group">
+                            <label for="registrationEmail">E-mail</label>
+                            <input id="registrationEmail" name="entry.1150981642" type="email" placeholder="your@email.com" autocomplete="email" required>
+                        </div>
+
+                        <fieldset class="field-group age-field">
+                            <legend>Age</legend>
+                            <div class="age-options">
+                                <label>
+                                    <input type="radio" name="entry.1610835725" value="12 - 15" required>
+                                    <span>12 - 15</span>
+                                </label>
+
+                                <label>
+                                    <input type="radio" name="entry.1610835725" value="16 - 19" required>
+                                    <span>16 - 19</span>
+                                </label>
+
+                                <label>
+                                    <input type="radio" name="entry.1610835725" value="20 - 29" required>
+                                    <span>20 - 29</span>
+                                </label>
+
+                                <label>
+                                    <input type="radio" name="entry.1610835725" value="30+" required>
+                                    <span>30+</span>
+                                </label>
+                            </div>
+                        </fieldset>
+
+                        <input type="hidden" name="fvv" value="1">
+                        <input type="hidden" name="partialResponse" value="[null,null,&quot;4365967641248841857&quot;]">
+                        <input type="hidden" name="pageHistory" value="0">
+                        <input type="hidden" name="fbzx" value="4365967641248841857">
+                        <input type="hidden" name="submissionTimestamp" value="-1">
+
+                        <button class="registration-submit" type="submit">Submit Registration</button>
+                        <p class="registration-message" id="registrationMessage" role="status" aria-live="polite"></p>
+                    </form>
+                </div>
+            </section>
+
+            <section class="section cta-section">
+                <div class="cta-shell reveal">
+                    <h2 class="cta-quote">
+                        Don't <span class="club-glow">miss</span> out.
+                        You don't always see <span class="highlight">opportunities</span> like this.
+                    </h2>
+
+                    <p class="cta-subtitle">
+                        Register to receive all updates.
+                    </p>
+
+                    <a href="#register" class="cta-btn">
+                        Let's Go
+                    </a>
+                </div>
+            </section>
+        </main>
+
+        <footer class="footer">
+            <div class="footer-logos">
+                <img src="assets/logos/tuniv_gsing.png" alt="Tunivisions Logo">
+                <img src="assets/logos/astra_horiz.png" alt="Astra Logo">
+            </div>
+
+            <div class="footer-info">
+                <p>
+                    A student-led astronomy and space conference organized by
+                    <span class="club-glow">
+                        TUNIVISIONS CLUB HIGH SCHOOL GSING DJERBA
+                    </span>.
+                </p>
+
+                <p>
+                    &#9993;&#65039; tunivisionsclub@lesnouvellesgenerations.net
+                </p>
+            </div>
+
+            <div class="footer-links">
+                <a href="#about">About</a>
+                <a href="#register">Register</a>
+            </div>
+
+            <p class="footer-tagline">
+                Bringing the stars to everyone.
+            </p>
+
+            <div class="footer-bottom">
+                &copy; 2026 Astra Island Summit. All rights reserved.
+            </div>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
